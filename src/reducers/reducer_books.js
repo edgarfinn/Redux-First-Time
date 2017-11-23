@@ -3,5 +3,5 @@ export default function() {
     {title: 'Javascript The Good Parts' },
     {title: 'Harry Potter' },
     {title: 'Eloquent Javascript' }
-  ]
+  ];
 }

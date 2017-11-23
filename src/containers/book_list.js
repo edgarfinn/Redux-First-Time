@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
 
-export default class Booklist extends Component {
+// react-redux is the glue between react and redux.
+import { connect } from 'react-redux';
+// BOOK LIST IS GOING TO BE OUR CONTAINER THE STATE OF OUR BOOKS LIST
+
+// BookList is our container. Its the comopnent that cares about the state of our list of books
+class BookList extends Component {
   renderList() {
     return this.props.books.map((book) => {
       return (
         <li key={book.title} className="list-group-item">{book.title}</li>
-      )
-    })
+      );
+    });
   }
 
   render() {
@@ -19,7 +23,15 @@ export default class Booklist extends Component {
   }
 }
 
-// take our applications state as an arhument
+// Take our applications state as an arhument
+// This is where react and redux are lnked together
+
 function mapStateToProps(state) {
-    
+    // whatever is returned (usually an object) will show up as props inside of BookList
+    return {
+      books: state.books
+    };
 }
+
+export default connect(mapStateToProps)(BookList);
+// connect takes a function and component and produces a container.
