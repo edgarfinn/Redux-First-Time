@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 
 // react-redux is the glue between react and redux.
 import { connect } from 'react-redux';
-// BOOK LIST IS GOING TO BE OUR CONTAINER THE STATE OF OUR BOOKS LIST
+import { selectedBook } from '../actions/index';
+// bindActionCreators distributes actions to reducers
+import { bindActionCreators } from 'redux';
 
 // BookList is our container. Its the comopnent that cares about the state of our list of books
 class BookList extends Component {
@@ -24,14 +26,19 @@ class BookList extends Component {
 }
 
 // Take our applications state as an arhument
-// This is where react and redux are lnked together
+// This is where react and redux are linked together
 
 function mapStateToProps(state) {
-    // whatever is returned (usually an object) will show up as props inside of BookList (our container)
+    // Anything returned (usually an object) will show up as props inside of BookList (our container)
     return {
       books: state.books
     };
 }
 
-export default connect(mapStateToProps)(BookList);
+function mapDispatchToProps() {
+  // whenever selectBook is called, the result should be passed to all reducers.
+  return bindActionCreators({selectBook: selectBook }, dispatch)
+}
+// Promote BookList from a component to a container - it needs to know about this new dispatch method, selectBook. Make it available as a prop.
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
 // connect takes a function and component and produces a container.
