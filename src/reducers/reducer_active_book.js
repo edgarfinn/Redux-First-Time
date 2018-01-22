@@ -6,6 +6,6 @@ export default (state = null, action) => {
     case 'BOOK_SELECTED':
       return action.payload;
   }
-  // base case, if not action is required, return state, unchanged
+  // base case: if no action is required, return state, unchanged
   return state;
 }
